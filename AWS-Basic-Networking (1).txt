@@ -1,0 +1,218 @@
+
+AWS & DEVOPS@11AM
+-------------------------------
+BASIC NETWORKING - 3 TO 4 HRS
+AWS : 30 - 35 HRS
+SHELL SCRIPT,LINUX : 10 HRS
+DEVOPS : 30 - 35 HRS
+
+BASIC NETWORKING:
+
+1)IP ADDRESS
+
+2)VPC
+
+3)SUBNETS
+
+4)IGW AND NAT
+
+5) ROUTE TABLE
+
+6) SG AND NACL
+
+7)KEY PAIRS
+
+8) AMI
+
+9)EC2
+
+
+1)IP ADDRESS:
+
+--It is an identity of the resource.
+
+--IP Address : 2 types
+
+1) IPV4 : --32 bit range
+
+	  x.x.x.x (0.0.0.0 -- 255.255.255.255)
+
+2) IPV6 : --128 bit range
+
+	x:x:x::x
+
+Each Resource is having 2 ips 
+
+1) Public IP(1)
+
+2) Private IP(1+)
+
+Primary ip is Private IP
+
+For every restart our public ips are changed,private ips are remains same.
+
+To Get constant public ip we need to use Elastic IP.
+
+idle Elastic IP is charagable.
+
+Operations on EIP :
+
+1)Allocate EIP to AWS Account.
+2)Associate EIP to any Resource
+3)DisAssociate from resource.
+4)Release EIP from our Account.
+
+
+CLASS-A:(N.H.H.H):0.0.0.0 --- 127.255.255.255 : 16777214 IPS
+
+CLASS-B: (N.N.H.H):128.0.0.0 --- 191.255.255.255 :65536 IPS
+
+CLASS-C :(N.N.N.H): 192.0.0.0. --- 223.255.255.255 : 256 IPS
+
+
+---------------------------------------------------------------------
+
+VPC : Virtual Private Cloud
+
+--It is a large Network
+
+--It holds range of ip address
+
+--we notify VPC with CIDR block.
+
+CIDR : ClassLess InterDomain Routing
+
+	X.X.X.X/X
+
+	/X -- SUBNET MASKING :(8 - 30)
+
+Eg :
+
+10.0.0.0/16 : 65536 ips
+
+
+10.0.0.0/17 : 32768 ips
+
+
+10.0.0.0/18 : 16384 ips
+
+
+
+10.0.0.0/15 : 131072 ips
+
+Note : In AWS per region we can maintain 5 VPC's
+
+3)SUBNETS:
+
+--It is a slice of large Network
+
+--It holds range of ip address
+
+--we notify subnets with CIDR block.
+
+
+X.X.X.X/X
+
+/X -- SUBNET MASKING :(8 - 30)
+
+Eg :
+
+VPC - 10.0.0.0/16 : 65536 ips
+
+subnet-1 : 10.0.1.0/20    4094/4096 (-2)
+
+subnet-2 : 10.0.2.0/24    254/256
+
+subnet-3 : 10.0.3.0/22    1022/1024
+
+Note : In each subnet 2 ips are reserved - min ip and max ip
+
+Note: In AWS each subnet reserves 5 ips (First 4 and Last one)
+
+1.Network Address : 10.0.0.0
+2.for VPC : 10.0.0.1
+3.for DNS Server : 10.0.0.2
+4.for future usage : 10.0.0.3
+5.for Network broadcast address : 10.0.0.255
+
+
+IGW : INternet Gateway :
+
+
+--To provide internet Services to your Network.
+
+--IGW and VPC are Associated in 1:1 
+
+NAT-IGW : 
+
+--To provide internet Services to your Private Network.
+
+--NAT Gateway is chargable in AWS
+
+
+5) ROUTE TABLE :
+
+ -- It is a GuideLine
+ 
+ -- default RouteTable is main RouteTable
+ 
+ -- we can create public and Private RouteTable
+ 
+ -- A Route Table can hold subnets and IGW,NAT-IGW,Peering Connection.... 
+
+6) SG AND NACL :
+
+ -- SG - Sucrity Group
+ -- SG work @ instance Level
+
+ -- SG contains Inbound Rules (incoming traffic) ,
+                Outbound Rules (outgoing traffic)
+
+    you have to specify inbound rules
+    SG outbound iare bydefault All Traffic is allowed .
+
+
+NACL : Network Access Controle List     
+
+ -- NACL work @ subnet Level
+
+
+ -- NACL contains Inbound Rules (incoming traffic) ,
+                Outbound Rules (outgoing traffic)
+ --Allowed Rules and Deny Rules with Rule Numbers
+
+ --NACL bydefault All traffic id denied.
+
+
+VPC Setup in AWS Environment :
+
+1.VPC CIDR block :
+
+VPC-1 : 10.0.0.0/16
+
+VPC-2 : 10.50.0.0/16
+
+VPC-3 : 192.168.0.0/16
+
+
+subnets : 
+
+VPC-1 : 10.0.0.0/16
+
+VPC1-subnet-1 : 10.0.0.0/22   -- 1024  (-5)
+
+VPC1-subnet-2 : 10.0.4.0/22
+
+VPC1-subnet-3 : 10.0.8.0/22
+
+
+Route Table:  main RT
+
+
+
+
+
+
+
+
+
